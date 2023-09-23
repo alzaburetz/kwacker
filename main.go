@@ -1,17 +1,15 @@
 package main
 
 import (
-	"fmt"
-	"io"
 	"log"
 	"net/http"
+
+	"github.com/alzaburetz/kwacker/handlers"
 )
 
 func main() {
-	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		fmt.Println("Calling root")
-		io.WriteString(writer, "Hello world")
-	})
+	http.HandleFunc("/user/add", handlers.PostUser)
+	http.HandleFunc("/user/getall", handlers.GetUsers)
 
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }

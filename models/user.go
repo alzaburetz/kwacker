@@ -51,7 +51,7 @@ func (user User) ValidateSurname() error {
 }
 
 func (user User) ValidateNick() error {
-	if len(user.Name) < MIN_NAME_CHARACTERS {
+	if len(user.NickNameHandler) < MIN_NAME_CHARACTERS {
 		return fmt.Errorf("nickname must be at least %v elements", MIN_NAME_CHARACTERS)
 	}
 
@@ -70,5 +70,11 @@ func NewUser(name string, surname string, nickname string, posts int) (*User, er
 		Posts:           posts,
 	}
 
-	return &user, errors.Join(user.ValidateName(), user.ValidateSurname(), user.ValidateNick())
+	err := errors.Join(user.ValidateName(), user.ValidateSurname(), user.ValidateNick())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
 }

@@ -13,6 +13,7 @@ type User struct {
 	Surname         string
 	NickNameHandler string
 	Posts           int
+	IsValidated     bool
 }
 
 type UserModelValidator interface {
@@ -75,6 +76,8 @@ func NewUser(name string, surname string, nickname string, posts int) (*User, er
 	if err != nil {
 		return nil, err
 	}
+
+	user.IsValidated = true
 
 	return &user, nil
 }

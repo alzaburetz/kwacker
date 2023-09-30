@@ -5,11 +5,12 @@ import (
 	"net/http"
 
 	"github.com/alzaburetz/kwacker/handlers"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	http.HandleFunc("/user/add", handlers.PostUser)
-	http.HandleFunc("/user/getall", handlers.GetUsers)
+	godotenv.Load()
+	http.HandleFunc("/user/add", handlers.AddUser)
 
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }

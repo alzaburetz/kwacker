@@ -17,6 +17,7 @@ func SerializeUser(user models.User) (string, error) {
 		Surname:         user.Surname,
 		Posts:           user.Posts,
 		NickNameHandler: user.NickNameHandler,
+		Email:           user.Email,
 	}
 	result, err := json.Marshal(transportUser)
 

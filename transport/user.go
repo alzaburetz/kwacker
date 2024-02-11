@@ -5,4 +5,5 @@ type User struct {
 	Surname         string `json:"surname"`
 	NickNameHandler string `json:"nick_name"`
 	Posts           int    `json:"posts"`
+	Email           string `json:"email"`
 }

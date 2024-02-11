@@ -1,18 +1,19 @@
 version: "3.9"
 services:
-  postgres:
-    image: postgres:14.8-alpine3.18
-    environment:
-      POSTGRES_DB: "kwacker"
-      POSTGRES_USER: "kwacker"
-      POSTGRES_PASSWORD: "1234"
-      PGDATA: "/var/lib/postgresql/data/pgdata"
+  neo4j:
+    image: neo4j:latest
+    container_name: 'kwacker-data'
     volumes:
-      - ./migrations/initilize.sql:/docker-entrypoint-initdb.d/initilize.sql
-      - kwacker-pg-data:/var/lib/postgresql/data
-      - /var/run/postgresql/:/var/run/postgresql
+      - '$HOME/neo4j/data:/data'
+      - '$HOME/neo4j/conf/:/conf/'
     ports:
-      - "5432:5432"
+      - 7474:7474
+      - 7687:7687
+    restart: on-failure
+    networks:
+        - neo4j_go_net
+    command: neo4j
 
-volumes:
-  kwacker-pg-data:
+networks:
+  neo4j_go_net:
+    driver: bridge

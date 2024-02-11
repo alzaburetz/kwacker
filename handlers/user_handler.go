@@ -22,7 +22,7 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("Deserialized as: %v\n", user)
 
-	userModel, _ := models.NewUser(user.Name, user.Surname, user.NickNameHandler, 0)
+	userModel, _ := models.NewUser(user.Name, user.Surname, user.NickNameHandler, user.Email, 0)
 
 	ctx := context.Background()
 

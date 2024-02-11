@@ -37,7 +37,7 @@ func TestValidateNameShouldReturnError(t *testing.T) {
 // New user can be created
 func TestNewUserCanBeCreated(t *testing.T) {
 	// Act
-	_, err := user.NewUser("John", "Dow", "john_doe", 2)
+	_, err := user.NewUser("John", "Dow", "john_doe", "test@test.com", 2)
 
 	// Assert
 	if err != nil {
@@ -48,7 +48,7 @@ func TestNewUserCanBeCreated(t *testing.T) {
 // New user can not be created if name starts with lower-case letter
 func TestNewUserCanNotBeCreatedIfNameStartsWithLowerCase(t *testing.T) {
 	// Act
-	_, err := user.NewUser("john", "Doe", "john_doe", 2)
+	_, err := user.NewUser("john", "Doe", "john_doe", "test@test.com", 2)
 
 	// Assert
 	if err.Error() != "name must start with upper case" {
@@ -59,7 +59,7 @@ func TestNewUserCanNotBeCreatedIfNameStartsWithLowerCase(t *testing.T) {
 // New user can not be created if surname starts with lower-case letter
 func TestNewUserCanNotBeCreatedIfSurnameStartsWithLowerCase(t *testing.T) {
 	// Act
-	_, err := user.NewUser("John", "doe", "john_doe", 2)
+	_, err := user.NewUser("John", "doe", "john_doe", "test@test.com", 2)
 
 	// Assert
 	if err.Error() != "surname must start with upper case" {
@@ -70,7 +70,7 @@ func TestNewUserCanNotBeCreatedIfSurnameStartsWithLowerCase(t *testing.T) {
 // New user can not be created if nickname consist of less than 2 characters
 func TestNewUserCanNotBeCreatedIfNickNameIsInvalid(t *testing.T) {
 	// Act
-	_, err := user.NewUser("John", "Doe", "a", 2)
+	_, err := user.NewUser("John", "Doe", "a", "test@test.com", 2)
 
 	// Assert
 	if err.Error() != "nickname must be at least 2 elements" {
@@ -78,9 +78,21 @@ func TestNewUserCanNotBeCreatedIfNickNameIsInvalid(t *testing.T) {
 	}
 }
 
+// New user cannot be created if email is invalid
+func TestNewuserCanNotBeCreatedIfEmailIsInvalid(t *testing.T) {
+	// Act
+	_, err := user.NewUser("John", "Doe", "john_doe", "email", 2)
+
+	// Assert
+	if err == nil {
+		t.Errorf("User still got created with invalid email")
+	}
+}
+
+// New user cannot be created if number of posts is less than zero
 func TestNewUserCanNotBeCreatedIfPostsAmountIsLessThanZero(t *testing.T) {
 	// Act
-	_, err := user.NewUser("John", "Doe", "john_doe", -1)
+	_, err := user.NewUser("John", "Doe", "john_doe", "test@test.com", -1)
 
 	// Assert
 	if err.Error() != "posts count cannot be less than zero" {

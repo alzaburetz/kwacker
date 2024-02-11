@@ -16,7 +16,7 @@ func DeserializeUser(userString string) (models.User, error) {
 		return models.User{}, err
 	}
 
-	domainUser, err := models.NewUser(user.Name, user.Surname, user.NickNameHandler, user.Posts)
+	domainUser, err := models.NewUser(user.Name, user.Surname, user.NickNameHandler, user.Email, user.Posts)
 
 	if err != nil {
 		return models.User{}, err

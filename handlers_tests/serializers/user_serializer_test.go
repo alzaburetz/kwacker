@@ -9,8 +9,8 @@ import (
 
 func TestSerializeUserWorksCorrectly(t *testing.T) {
 	// Arrange
-	user, _ := models.NewUser("John", "Doe", "john", 2)
-	expectedJson := "{\"name\":\"John\",\"surname\":\"Doe\",\"nick_name\":\"john\",\"posts\":2}"
+	user, _ := models.NewUser("John", "Doe", "john", "test@test.com", 2)
+	expectedJson := "{\"name\":\"John\",\"surname\":\"Doe\",\"nick_name\":\"john\",\"posts\":2,\"email\":\"test@test.com\"}"
 
 	// Act
 	result, err := serializers.SerializeUser(*user)
